@@ -3,78 +3,85 @@
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;500&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
 
-body{
+*{
     margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    width:100%;
+    padding:15px;
     background:transparent;
     text-align:center;
     font-family:'Cormorant Garamond',serif;
     color:#222;
+    overflow-x:hidden;
 }
 
 .titulo{
     font-family:'Great Vibes',cursive;
-    font-size:54px;
-    margin-top:10px;
+    font-size:clamp(2.2rem,6vw,3.5rem);
+    margin-bottom:20px;
 }
 
 #contador{
     display:flex;
     justify-content:center;
-    gap:25px;
-    margin-top:25px;
+    align-items:center;
+    gap:clamp(10px,3vw,25px);
+    width:100%;
+    max-width:900px;
+    margin:0 auto;
+}
+
+#contador > div{
+    flex:1;
+    min-width:0;
 }
 
 .numero{
-    font-size:90px;
+    font-size:clamp(2.4rem,9vw,5.6rem);
     font-weight:300;
     line-height:1;
 }
 
 .texto{
-    font-size:22px;
+    font-size:clamp(.7rem,2vw,1.4rem);
     letter-spacing:2px;
+    margin-top:5px;
 }
 
 .footer{
-
     margin-top:25px;
-
     font-family:'Great Vibes',cursive;
-
-    font-size:46px;
-
+    font-size:clamp(2rem,5vw,3rem);
 }
 
-@media(max-width:700px){
+@media (max-width:480px){
 
-.numero{
+    body{
+        padding:10px;
+    }
 
-font-size:52px;
+    #contador{
+        gap:8px;
+    }
 
-}
+    .numero{
+        font-size:2.1rem;
+    }
 
-.texto{
-
-font-size:16px;
-
-}
-
-.titulo{
-
-font-size:38px;
-
-}
-
-.footer{
-
-font-size:34px;
-
-}
+    .texto{
+        font-size:.65rem;
+        letter-spacing:1px;
+    }
 
 }
 
@@ -85,83 +92,72 @@ font-size:34px;
 <body>
 
 <div class="titulo">
-
 Faltan
-
 </div>
 
 <div id="contador">
 
-<div>
+    <div>
+        <div id="dias" class="numero">0</div>
+        <div class="texto">DÍAS</div>
+    </div>
 
-<div id="dias" class="numero">0</div>
+    <div>
+        <div id="horas" class="numero">0</div>
+        <div class="texto">HORAS</div>
+    </div>
 
-<div class="texto">DÍAS</div>
+    <div>
+        <div id="minutos" class="numero">0</div>
+        <div class="texto">MINUTOS</div>
+    </div>
 
-</div>
-
-<div>
-
-<div id="horas" class="numero">0</div>
-
-<div class="texto">HORAS</div>
-
-</div>
-
-<div>
-
-<div id="minutos" class="numero">0</div>
-
-<div class="texto">MINUTOS</div>
-
-</div>
-
-<div>
-
-<div id="segundos" class="numero">0</div>
-
-<div class="texto">SEGUNDOS</div>
-
-</div>
+    <div>
+        <div id="segundos" class="numero">0</div>
+        <div class="texto">SEGUNDOS</div>
+    </div>
 
 </div>
 
 <div class="footer">
-
 Para el gran día
-
 </div>
 
 <script>
 
-const fecha=new Date("December 19, 2026 19:00:00").getTime();
+const fecha = new Date("December 19, 2026 19:00:00").getTime();
 
-setInterval(function(){
+function actualizarContador(){
 
-const ahora=new Date().getTime();
+    const ahora = new Date().getTime();
+    const diferencia = fecha - ahora;
 
-const diferencia=fecha-ahora;
+    if(diferencia <= 0){
 
-const dias=Math.floor(diferencia/(1000*60*60*24));
+        document.getElementById("dias").textContent = "0";
+        document.getElementById("horas").textContent = "0";
+        document.getElementById("minutos").textContent = "0";
+        document.getElementById("segundos").textContent = "0";
+        return;
 
-const horas=Math.floor((diferencia%(1000*60*60*24))/(1000*60*60));
+    }
 
-const minutos=Math.floor((diferencia%(1000*60*60))/(1000*60));
+    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+    const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
 
-const segundos=Math.floor((diferencia%(1000*60))/1000);
+    document.getElementById("dias").textContent = dias;
+    document.getElementById("horas").textContent = String(horas).padStart(2,"0");
+    document.getElementById("minutos").textContent = String(minutos).padStart(2,"0");
+    document.getElementById("segundos").textContent = String(segundos).padStart(2,"0");
 
-document.getElementById("dias").innerHTML=dias;
+}
 
-document.getElementById("horas").innerHTML=horas;
-
-document.getElementById("minutos").innerHTML=minutos;
-
-document.getElementById("segundos").innerHTML=segundos;
-
-},1000);
+actualizarContador();
+setInterval(actualizarContador,1000);
 
 </script>
 
 </body>
-
 </html>
