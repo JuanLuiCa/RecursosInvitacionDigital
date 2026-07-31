@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;500&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+    margin:0;
+    background:transparent;
+    text-align:center;
+    font-family:'Cormorant Garamond',serif;
+    color:#222;
+}
+
+.titulo{
+    font-family:'Great Vibes',cursive;
+    font-size:54px;
+    margin-top:10px;
+}
+
+#contador{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    margin-top:25px;
+}
+
+.numero{
+    font-size:90px;
+    font-weight:300;
+    line-height:1;
+}
+
+.texto{
+    font-size:22px;
+    letter-spacing:2px;
+}
+
+.footer{
+
+    margin-top:25px;
+
+    font-family:'Great Vibes',cursive;
+
+    font-size:46px;
+
+}
+
+@media(max-width:700px){
+
+.numero{
+
+font-size:52px;
+
+}
+
+.texto{
+
+font-size:16px;
+
+}
+
+.titulo{
+
+font-size:38px;
+
+}
+
+.footer{
+
+font-size:34px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="titulo">
+
+Faltan
+
+</div>
+
+<div id="contador">
+
+<div>
+
+<div id="dias" class="numero">0</div>
+
+<div class="texto">DÍAS</div>
+
+</div>
+
+<div>
+
+<div id="horas" class="numero">0</div>
+
+<div class="texto">HORAS</div>
+
+</div>
+
+<div>
+
+<div id="minutos" class="numero">0</div>
+
+<div class="texto">MINUTOS</div>
+
+</div>
+
+<div>
+
+<div id="segundos" class="numero">0</div>
+
+<div class="texto">SEGUNDOS</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+Para el gran día
+
+</div>
+
+<script>
+
+const fecha=new Date("December 20, 2026 17:00:00").getTime();
+
+setInterval(function(){
+
+const ahora=new Date().getTime();
+
+const diferencia=fecha-ahora;
+
+const dias=Math.floor(diferencia/(1000*60*60*24));
+
+const horas=Math.floor((diferencia%(1000*60*60*24))/(1000*60*60));
+
+const minutos=Math.floor((diferencia%(1000*60*60))/(1000*60));
+
+const segundos=Math.floor((diferencia%(1000*60))/1000);
+
+document.getElementById("dias").innerHTML=dias;
+
+document.getElementById("horas").innerHTML=horas;
+
+document.getElementById("minutos").innerHTML=minutos;
+
+document.getElementById("segundos").innerHTML=segundos;
+
+},1000);
+
+</script>
+
+</body>
+
+</html>
