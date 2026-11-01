@@ -1,1 +1,95 @@
 
+:root {
+    --color-background: #f8f5f0;
+    --color-text: #51483f;
+    --color-accent: #a58b70;
+    --color-white: #ffffff;
+
+    --font-title: 'Great Vibes', cursive;
+    --font-text: 'Cormorant Garamond', serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-text);
+    font-size: 20px;
+    text-align: center;
+}
+
+.hero {
+    min-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    background:
+        linear-gradient(
+            rgba(0,0,0,.25),
+            rgba(0,0,0,.25)
+        ),
+        url('../img/portada.jpg') center/cover;
+    color: white;
+}
+
+.hero h1 {
+    font-family: var(--font-title);
+    font-size: clamp(55px, 10vw, 100px);
+    font-weight: 400;
+}
+
+.hero p {
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+}
+
+.hero span {
+    display: block;
+    margin-top: 25px;
+    letter-spacing: 3px;
+}
+
+.section {
+    padding: 75px 20px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.section h2 {
+    font-family: var(--font-title);
+    font-size: 48px;
+    font-weight: 400;
+    color: var(--color-accent);
+    margin-bottom: 25px;
+}
+
+.section p {
+    max-width: 650px;
+    margin: auto;
+    line-height: 1.7;
+}
+
+@media (max-width: 600px) {
+    .hero {
+        min-height: 85vh;
+    }
+
+    .section {
+        padding: 55px 20px;
+    }
+
+    .section h2 {
+        font-size: 40px;
+    }
+}
+
